@@ -13,16 +13,27 @@ document.querySelector('.icon').onclick = function(){
 
 // website colors
 let recentColor = localStorage.getItem('color');
+const colorsList = document.querySelectorAll('.colors li');
 if(recentColor != null){
     document.documentElement.style.setProperty('--main-color',recentColor);
-    // put here the code of handling the active class
+    colorsList.forEach(color =>{
+        if(color.dataset.color == recentColor){
+            handleActive(color,colorsList);
+        }
+    });
 }
 
-const colorsList = document.querySelectorAll('.colors li');
 colorsList.forEach(color => {
     color.addEventListener('click', (e) => {
         document.documentElement.style.setProperty('--main-color',e.target.dataset.color);
         localStorage.setItem('color',e.target.dataset.color);
-        // put here the code of handling the active class
+        handleActive(color, colorsList);
     });
 });
+
+function handleActive(elem,list){
+    list.forEach(e =>{
+        e.classList.remove('active');
+    })
+    elem.classList.add('active');
+};
