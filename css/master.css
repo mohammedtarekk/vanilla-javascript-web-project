@@ -53,6 +53,22 @@
 .settings-box .options .box .colors li:nth-child(5){background-color: #4CAF50}
 
 .settings-box .options .box .colors li.active{border: 2px solid #888}
+
+.settings-box .options .box .rand{margin-top: 10px}
+
+.settings-box .options .box .rand button{
+    padding: 4px 0;
+    border: none;
+    background-color: var(--main-color);
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 50px;
+    opacity: .7
+}
+
+.settings-box .options .box .rand button.active{opacity: 1}
 /* END SETTINGS BOX */
 
 /* START HEADER */

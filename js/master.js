@@ -1,14 +1,47 @@
-// automatic change the background of header
-let imgs = ["01.jpg","02.jpg","03.jpg","04.jpg"];
-setInterval(() => {
-    let r = Math.floor(Math.random() * imgs.length);
-    document.querySelector('.header').style.background = `url("imgs/${imgs[r]}") no-repeat center center fixed`;
-},3000);
-
 // settings box configurations
 document.querySelector('.icon').onclick = function(){
     document.querySelector('.icon i').classList.toggle('fa-spin');
     document.querySelector('.settings-box').classList.toggle('open');
+};
+
+// random background options
+let rand_options = document.querySelectorAll('.settings-box .box button');
+let background_random;
+
+let state = localStorage.getItem('rand_background_state');
+if(state == null | state == "true"){
+    randomize_background();
+    handleActive(rand_options[0], rand_options);
+}
+else
+    handleActive(rand_options[1], rand_options);
+
+rand_options.forEach(bt => {
+    bt.addEventListener('click',(e) => {
+
+        handleActive(e.target, rand_options);       // e.target = bt, y3ne mmkn astkhdm ay haga fehom
+
+        let action = e.target.dataset.action;
+        if(action == "true")
+        {
+            clearInterval(background_random);       // as it's initially active, it should be cleared first, then recalled
+            randomize_background();
+        }
+        else
+            clearInterval(background_random);
+
+        localStorage.setItem('rand_background_state',action);
+    });
+});
+
+
+// automatic change the background of header
+let imgs = ["01.jpg","02.jpg","03.jpg","04.jpg"];
+function randomize_background(){
+    background_random = setInterval(() => {
+    let r = Math.floor(Math.random() * imgs.length);
+    document.querySelector('.header').style.background = `url("imgs/${imgs[r]}") no-repeat center center fixed`;
+    },1000);
 };
 
 // website colors
@@ -30,6 +63,7 @@ colorsList.forEach(color => {
         handleActive(color, colorsList);
     });
 });
+
 
 function handleActive(elem,list){
     list.forEach(e =>{
