@@ -65,6 +65,23 @@ colorsList.forEach(color => {
 });
 
 
+// progress bars auto fill
+let progress_section = document.querySelector('.skills');
+let progress_items = document.querySelectorAll('.item .progress-bar span');
+window.onscroll = () => {
+    if(this.pageYOffset == progress_section.offsetTop + progress_section.offsetHeight - this.innerHeight){
+        progress_items.forEach(elem =>{
+            elem.style.setProperty('width',elem.dataset.progress);
+        });
+    }
+    else{
+        progress_items.forEach(elem =>{
+            elem.style.setProperty('width','0');
+        });
+    }
+};
+
+
 function handleActive(elem,list){
     list.forEach(e =>{
         e.classList.remove('active');
