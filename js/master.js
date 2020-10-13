@@ -69,7 +69,7 @@ colorsList.forEach(color => {
 let progress_section = document.querySelector('.skills');
 let progress_items = document.querySelectorAll('.item .progress-bar span');
 window.onscroll = () => {
-    if(this.pageYOffset == progress_section.offsetTop + progress_section.offsetHeight - this.innerHeight){
+    if(this.pageYOffset >= progress_section.offsetTop + progress_section.offsetHeight - this.innerHeight){
         progress_items.forEach(elem =>{
             elem.style.setProperty('width',elem.dataset.progress);
         });
@@ -82,6 +82,48 @@ window.onscroll = () => {
 };
 
 
+// gallery pop-up screen
+let gallery_items = document.querySelectorAll('.gallery-items img');
+var clicked_flag = false;
+
+gallery_items.forEach(pic => {
+    this.addEventListener('click',() => {
+        debugger;
+        var overlay = document.createElement('div');
+        var popUp_box = document.createElement('div');
+        var close_button = document.createElement('span');
+
+        if(!clicked_flag){
+            debugger;
+            overlay.classList.add('popUp-overlay');
+            document.body.appendChild(overlay);
+
+            popUp_box.className = 'pupUp-box';
+            pic.className = 'popUp-img';
+            popUp_box.appendChild(pic);
+
+            close_button.appendChild(document.createTextNode('X'));
+            close_button.classList.add('close-button');
+            popUp_box.insertBefore(close_button,pic);
+
+            document.body.appendChild(popUp_box);
+        }
+
+        document.querySelector('.close-button').addEventListener('click',() => {
+            debugger;
+            overlay.remove();
+            popUp_box.remove();
+
+            clicked_flag = false;
+        });
+
+        debugger;
+        clicked_flag = true;
+    });
+});
+
+
+//---------------------------------------------------------
 function handleActive(elem,list){
     list.forEach(e =>{
         e.classList.remove('active');
