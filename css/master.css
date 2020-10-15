@@ -202,19 +202,20 @@ h2{
     left: 0
 }
 
-.pupUp-box{
+.popUp-box{
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #FFFFFF;
     padding: 20px;
-    z-index: 1000
+    z-index: 1000;
+    text-align: center
 }
 
 .popUp-img{max-width: 100%}
 
-.pupUp-box .close-button{
+.popUp-box .close-button{
     position: absolute;
     right: -15px;
     top: -15px;
@@ -228,4 +229,6 @@ h2{
     font-weight: bold;
     cursor: pointer
 }
+
+.popUp-box h3{margin: 20px 0; color: var(--main-color)}
 /* END GALLERY */

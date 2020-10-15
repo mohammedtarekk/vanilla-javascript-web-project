@@ -84,43 +84,44 @@ window.onscroll = () => {
 
 // gallery pop-up screen
 let gallery_items = document.querySelectorAll('.gallery-items img');
-var clicked_flag = false;
-
 gallery_items.forEach(pic => {
-    this.addEventListener('click',() => {
-        debugger;
-        var overlay = document.createElement('div');
-        var popUp_box = document.createElement('div');
-        var close_button = document.createElement('span');
+    pic.addEventListener('click',() => {
 
-        if(!clicked_flag){
-            debugger;
-            overlay.classList.add('popUp-overlay');
-            document.body.appendChild(overlay);
+        let overlay = document.createElement('div');
+        overlay.classList.add('popUp-overlay');
+        document.body.appendChild(overlay);
 
-            popUp_box.className = 'pupUp-box';
-            pic.className = 'popUp-img';
-            popUp_box.appendChild(pic);
+        let popUp_box = document.createElement('div');
+        popUp_box.className = 'popUp-box';
 
-            close_button.appendChild(document.createTextNode('X'));
-            close_button.classList.add('close-button');
-            popUp_box.insertBefore(close_button,pic);
+        let popUpImage = document.createElement('img');
+        popUpImage.className = 'popUp-img';
+        popUpImage.src = pic.src;
+        popUp_box.appendChild(popUpImage);
 
-            document.body.appendChild(popUp_box);
+        let close_button = document.createElement('span');
+        close_button.appendChild(document.createTextNode('X'));
+        close_button.classList.add('close-button');
+        popUp_box.insertBefore(close_button,popUpImage);
+
+        if (pic.alt !== null) {
+            let imgHeading = document.createElement("h3");      
+            let imgText = document.createTextNode(pic.alt);      
+            imgHeading.appendChild(imgText);      
+            popUp_box.insertBefore(imgHeading, popUpImage);
         }
-
-        document.querySelector('.close-button').addEventListener('click',() => {
-            debugger;
-            overlay.remove();
-            popUp_box.remove();
-
-            clicked_flag = false;
-        });
-
-        debugger;
-        clicked_flag = true;
+        
+        document.body.appendChild(popUp_box);
     });
 });
+
+document.addEventListener('click',(e) => {
+    if (e.target.className == 'close-button') {
+        e.target.parentNode.remove();
+        document.querySelector(".popUp-overlay").remove();
+    }
+});
+
 
 
 //---------------------------------------------------------
